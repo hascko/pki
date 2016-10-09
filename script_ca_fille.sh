@@ -29,6 +29,7 @@ echo "default_days	= 365" >> /tp_pki/openssl.cnf
 echo "default_md	= sha1" >> /tp_pki/openssl.cnf
 echo "preserve	= no" >> /tp_pki/openssl.cnf
 echo "policy		= policy_match" >> /tp_pki/openssl.cnf
+echo "crl		= \$dir/$nom_certif/crl.pem" >> /tp_pki/openssl.cnf
 echo " " >> /tp_pki/openssl.cnf
 echo "#fin CA_$nom_certif" >> /tp_pki/openssl.cnf
 
