@@ -30,26 +30,26 @@ default_ca	= root_cbi
 
 [ root_cbi ]
 dir				= /opt/rootpki
-certs			= $dir/root_cbi/certs
-new_certs_dir	= $dir/root_cbi/newcerts
-database		= $dir/root_cbi/index.txt
-certificate		= $dir/root_cbi/root_cbi.pem
-serial			= $dir/root_cbi/serial
-private_key		= $dir/root_cbi/root_cbi.key
+certs			= \$dir/root_cbi/certs
+new_certs_dir	= \$dir/root_cbi/newcerts
+database		= \$dir/root_cbi/index.txt
+certificate		= \$dir/root_cbi/root_cbi.pem
+serial			= \$dir/root_cbi/serial
+private_key		= \$dir/root_cbi/root_cbi.key
 default_days	= 365
 default_md		= sha1
 preserve		= no
 policy			= policy_anything
-crl				= $dir/root_cbi/crl.pem
+crl				= \$dir/root_cbi/crl.pem
 
 [ $nom_certif ]
 dir 			= /opt/rootpki/$nom_certif
-certs			= $dir/certs
-new_certs_dir	= $dir/newcerts
-database		= $dir/index.txt
-certificate		= $dir/$nom_certif.pem
-serial			= $dir/serial
-private_key		= $dir/$nom_certif.key
+certs			= \$dir/certs
+new_certs_dir	= \$dir/newcerts
+database		= \$dir/index.txt
+certificate		= \$dir/$nom_certif.pem
+serial			= \$dir/serial
+private_key		= \$dir/$nom_certif.key
 default_days	= 365
 default_md		= sha1
 preserve		= no
@@ -132,17 +132,17 @@ extendedKeyUsage		= clientAuth" > /$repertoire/$nom_certif/openssl.cnf
 #echo "#debut CA_$nom_certif" >> /$repertoire/openssl.cnf
 #echo "[ CA_$nom_certif ]" >> /$repertoire/openssl.cnf
 #echo "dir		= ." >> /$repertoire/openssl.cnf
-#echo "certs		= \$dir/$nom_certif/certs" >> /$repertoire/openssl.cnf
-#echo "new_certs_dir	= \$dir/$nom_certif/newcerts" >> /$repertoire/openssl.cnf
-#echo "database	= \$dir/$nom_certif/index.txt" >> /$repertoire/openssl.cnf
-#echo "certificate	= \$dir/$nom_certif/$nom_certif.pem" >> /$repertoire/openssl.cnf
-#echo "serial		= \$dir/$nom_certif/serial" >> /$repertoire/openssl.cnf
-#echo "private_key	= \$dir/$nom_certif/$nom_certif.key" >> /$repertoire/openssl.cnf
+#echo "certs		= \\$dir/$nom_certif/certs" >> /$repertoire/openssl.cnf
+#echo "new_certs_dir	= \\$dir/$nom_certif/newcerts" >> /$repertoire/openssl.cnf
+#echo "database	= \\$dir/$nom_certif/index.txt" >> /$repertoire/openssl.cnf
+#echo "certificate	= \\$dir/$nom_certif/$nom_certif.pem" >> /$repertoire/openssl.cnf
+#echo "serial		= \\$dir/$nom_certif/serial" >> /$repertoire/openssl.cnf
+#echo "private_key	= \\$dir/$nom_certif/$nom_certif.key" >> /$repertoire/openssl.cnf
 #echo "default_days	= 365" >> /$repertoire/openssl.cnf
 #echo "default_md	= sha1" >> /$repertoire/openssl.cnf
 #echo "preserve	= no" >> /$repertoire/openssl.cnf
 #echo "policy		= policy_match" >> /$repertoire/openssl.cnf
-#echo "crl		= \$dir/$nom_certif/crl.pem" >> /$repertoire/openssl.cnf
+#echo "crl		= \\$dir/$nom_certif/crl.pem" >> /$repertoire/openssl.cnf
 #echo " " >> /$repertoire/openssl.cnf
 #echo "#fin CA_$nom_certif" >> /$repertoire/openssl.cnf
 
