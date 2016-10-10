@@ -13,7 +13,7 @@ password_certif_fille=$4
 $cname=$5
 $email=$6
 
-$repertoire=/opt/rootpki
+repertoire=/opt/rootpki
 
 echo "$password_certif_fille" > /$repertoire/$nom_certif/ca.pass
 
