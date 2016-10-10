@@ -6,7 +6,7 @@
 #                                     #
 #######################################
 
-$repertoire="opt/rootpki"
+$repertoire="tp_pki/pki"
 
 reponse="oui"
 while [ $reponse == "oui" ]
