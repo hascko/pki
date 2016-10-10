@@ -43,7 +43,7 @@ case $choix in
 		read cname
 		echo "Entrez l'adresse email"
 		read email
-		/$repertoire/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $pays $departement $ville $organistaion $cname $email
+		/$repertoire/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $pays $departement $ville $organisation $cname $email
 		echo "Le certificat fille $nom_certif a bien ete cree"
 	;;
 	"2")
