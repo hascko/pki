@@ -31,11 +31,19 @@ case $choix in
 		read password_certif
 		echo "Entrez le mot de passe du certificat root"
 		read password_certif_root
+		echo "Entrez le pays (utilisez les initiaux. Ex: FR pour France)"
+		read pays
+		echo "Entrez le département"
+		read departement
+		echo "Entrez la ville"
+		read ville
+		echo "Entrez l'organisation"
+		read organisation
 		echo "Entrez le common name du nouveau certificat fille"
 		read cname
 		echo "Entrez l'adresse email"
 		read email
-		/$repertoire/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $cname $email
+		/$repertoire/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $pays $departement $ville $organistaion $cname $email
 		echo "Le certificat fille $nom_certif a bien ete cree"
 	;;
 	"2")
