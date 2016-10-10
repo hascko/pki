@@ -15,6 +15,11 @@ email=$6
 
 repertoire=/opt/rootpki
 
+pays=$(grep "countryName_default" $repertoire/$nom_certif/openssl.cnf | cut -d" " -f2)
+departement=$(grep "stateOrProvinceName_default" $repertoire/$nom_certif/openssl.cnf | cut -d" " -f2)
+ville=$(grep "localityName_default" $repertoire/$nom_certif/openssl.cnf | cut -d" " -f2)
+organisation=$(grep "organizationName_default" $repertoire/$nom_certif/openssl.cnf | cut -d" " -f2)
+
 echo "$password_certif_fille" > $repertoire/$nom_certif/ca.pass
 
 # On cree le couple de cle
@@ -23,7 +28,7 @@ $password_client
 EOF
 
 # On cree un certificat non signe
-openssl req -new -nodes -batch -newkey rsa:1024 -keyout $repertoire/$nom_certif/$nom_client/$nom_client.key -out $repertoire/$nom_certif/$nom_client/$nom_client.crs -config $repertoire/$nom_certif/openssl.cnf -subj "/CN=$cname/emailAddress=$email"
+openssl req -new -nodes -batch -newkey rsa:1024 -keyout $repertoire/$nom_certif/$nom_client/$nom_client.key -out $repertoire/$nom_certif/$nom_client/$nom_client.crs -config $repertoire/$nom_certif/openssl.cnf -subj "/C=$pays/ST=$departement/L=$ville/O=$organisation/CN=$cname/emailAddress=$email"
 
 # On signe avec la cle privee CA
 openssl ca -passin file:$repertoire/$nom_certif/ca.pass -batch -name CA_$nom_certif -config $repertoire/$nom_certif/openssl.cnf -extensions CLIENT_RSA_SSL -out $repertoire/$nom_certif/$nom_client/$nom_client.pem -infiles $repertoire/$nom_certif/$nom_client/$nom_client.crs
