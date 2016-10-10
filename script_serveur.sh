@@ -13,7 +13,7 @@ password_certif_fille=$4
 $cname=$5
 $email=$6
 
-$repertoire=/opt/rootpki
+repertoire=/opt/rootpki
 
 #On créé le répertoire du serveur
 mkdir /$repertoire/$nom_certif/$nom_serveur
