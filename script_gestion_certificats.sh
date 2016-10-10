@@ -6,6 +6,8 @@
 #                                     #
 #######################################
 
+$repertoire="opt/rootpki"
+
 reponse="oui"
 while [ $reponse == "oui" ]
 do
@@ -33,7 +35,7 @@ case $choix in
 		read cname
 		echo "Entrez l'adresse email"
 		read email
-		/tp_pki/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $cname $email
+		/$repertoire/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $cname $email
 		echo "Le certificat fille $nom_certif a bien ete cree"
 	;;
 	"2")
@@ -41,7 +43,7 @@ case $choix in
 		read nom_certif
 		echo "Entrez le mot de passe root"
 		read password_root
-		/tp_pki/revocation_ca_fille.sh $nom_certif $password_root
+		/$repertoire/revocation_ca_fille.sh $nom_certif $password_root
 		echo "Le certificat fille $nom_certif a bien ete revoque"
 	;;
 	"3")
@@ -57,7 +59,7 @@ case $choix in
 		read cname
 		echo "Entrez l'adresse email"
 		read email
-		/tp_pki/script_serveur.sh $nom_certif $nom_certif_fille $password_serveur $password_certif_fille $cname $email
+		/$repertoire/script_serveur.sh $nom_certif $nom_certif_fille $password_serveur $password_certif_fille $cname $email
 		echo "Le certificat serveur $nom_certif a bien ete cree"
 	;;
 	"4")
@@ -65,7 +67,7 @@ case $choix in
 		read serveur
 		echo "Entrez le nom du certificat fille"
 		read certif_fille
-		/tp_pki/revocation_serveur.sh $serveur $certif_fille
+		/$repertoire/revocation_serveur.sh $serveur $certif_fille
 		echo "Le certificat serveur $serveur du certificat fille $certif_fille a bien ete revoque"
 	;;
 	"5")
@@ -81,7 +83,7 @@ case $choix in
 		read cname
 		echo "Entrez l'adresse email"
 		read email
-		/tp_pki/script_serveur.sh $nom_certif $nom_certif_fille $password_serveur $password_certif_fille $cname $email
+		/$repertoire/script_serveur.sh $nom_certif $nom_certif_fille $password_serveur $password_certif_fille $cname $email
 		echo "Le certificat client $nom_certif a bien ete cree"
 	;;
 	"6")
@@ -89,7 +91,7 @@ case $choix in
 		read client
 		echo "Entrez le nom du certificat fille"
 		read certif_fille
-		/tp_pki/revocation_serveur.sh $client $certif_fille
+		/$repertoire/revocation_serveur.sh $client $certif_fille
 		echo "Le certificat serveur $serveur du certificat fille $certif_fille a bien ete revoque"
 	;;
 esac
