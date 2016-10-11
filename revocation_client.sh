@@ -23,3 +23,5 @@ let i--
 
 let i++
 done
+cp -R /$repertoire/$files/ /$repertoire/archives
+rm -R /$repertoire/$files/

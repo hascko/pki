@@ -20,6 +20,7 @@ repertoire="opt/rootpki"
 
 # On cree le repertoire du certificat fille et fichiers utiles
 mkdir -p /$repertoire/$nom_certif/newcerts
+mkdir -p /$repertoire/$nom_certif/archives
 touch /$repertoire/$nom_certif/index.txt
 echo '01' > /$repertoire/$nom_certif/serial
 echo "$password_certif_root" > /$repertoire/$nom_certif/ca.pass
