@@ -29,7 +29,7 @@ case $choix in
 		nb_filles_existantes=$(awk '/^V/{x+=1}END{print x}' /$repertoire1/index.txt)
 		limit=5
 
-		if [ "$nb_filles_existantes" -lt "$limit"];then
+		if [ "$nb_filles_existantes" -lt "$limit" ];then
 			echo "Entrez le nom du nouveau certificat fille"
 			read nom_certif
 			echo "Entrez le mot de passe du nouveau certificat fille"
