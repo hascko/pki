@@ -12,7 +12,7 @@ while [ "$i" -lt "$nb_files" ]
 do
 let i++
 fichier=0$i.pem
-cmp -s /$repertoire/$file1/$file1.pem ./$nom_certif/newcerts/$fichier
+cmp -s /$repertoire/$file1/$file1.pem /$repertoire/newcerts/$fichier
 
 if [ $? -eq 0 ];then
 	openssl ca -config /$repertoire/openssl.cnf -name $nom_certif -revoke /$repertoire/newcerts/$fichier
