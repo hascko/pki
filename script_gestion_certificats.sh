@@ -7,6 +7,7 @@
 #######################################
 
 repertoire="tp_pki/pki"
+repertoire1="opt/rootpki/root_cbi"
 
 reponse="oui"
 while [ $reponse == "oui" ]
@@ -25,26 +26,33 @@ read choix
 
 case $choix in
 	"1")
-		echo "Entrez le nom du nouveau certificat fille"
-		read nom_certif
-		echo "Entrez le mot de passe du nouveau certificat fille"
-		read password_certif
-		echo "Entrez le mot de passe du certificat root"
-		read password_certif_root
-		echo "Entrez le pays (utilisez les initiaux. Ex: FR pour France)"
-		read pays
-		echo "Entrez le département"
-		read departement
-		echo "Entrez la ville"
-		read ville
-		echo "Entrez l'organisation"
-		read organisation
-		echo "Entrez le common name du nouveau certificat fille"
-		read cname
-		echo "Entrez l'adresse email"
-		read email
-		/$repertoire/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $pays $departement $ville $organisation $cname $email
-		echo "Le certificat fille $nom_certif a bien ete cree"
+		nb_filles_existantes=$(awk '/^V/{x+=1}END{print x}' /$repertoire1/index.txt)
+		limit=5
+
+		if [ "$nb_filles_existantes" -lt "$limit"];then
+			echo "Entrez le nom du nouveau certificat fille"
+			read nom_certif
+			echo "Entrez le mot de passe du nouveau certificat fille"
+			read password_certif
+			echo "Entrez le mot de passe du certificat root"
+			read password_certif_root
+			echo "Entrez le pays (utilisez les initiaux. Ex: FR pour France)"
+			read pays
+			echo "Entrez le département"
+			read departement
+			echo "Entrez la ville"
+			read ville
+			echo "Entrez l'organisation"
+			read organisation
+			echo "Entrez le common name du nouveau certificat fille"
+			read cname
+			echo "Entrez l'adresse email"
+			read email
+			/$repertoire/script_ca_fille.sh $nom_certif $password_certif $password_certif_root $pays $departement $ville $organisation $cname $email
+			echo "Le certificat fille $nom_certif a bien ete cree"
+		else
+			echo "Désolé le quota limite d'Authorités filles est atteind"
+		fi
 	;;
 	"2")
 		echo "Entrez le nom du certificat fille"
