@@ -63,15 +63,31 @@ case $choix in
 		echo "Le certificat fille $nom_certif a bien ete revoque"
 	;;
 	"3")
+		echo "Choisissez le nom de l'authorité fille pour votre certificat svp"
+		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
+		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		IFS=$'\n'
+		tableau=( $( cat random ) )
+
+		i=0
+		while [ "$i" -lt "${#tableau[*]}" ]
+		do
+			echo $((i+1))- ${tableau[$i]}
+			let i++
+		done
+		read h
+		let h--
+		nom_certif_fille=${tableau[$h]}
+		rm random
 		echo "Entrez le nom du nouveau certificat serveur"
 		read nom_certif
-		echo "Entrez le nom du certificat fille"
-		read nom_certif_fille
 		echo "Entrez le mot de passe du nouveau certificat serveur"
 		read password_serveur
 		echo "Entrez le mot de passe du certificat fille"
 		read password_certif_fille
-		echo "Entrez le common name du nouveau certificat fille"
+		echo "Entrez le common name du nouveau certificat serveur"
 		read cname
 		echo "Entrez l'adresse email"
 		read email
@@ -79,36 +95,114 @@ case $choix in
 		echo "Le certificat serveur $nom_certif a bien ete cree"
 	;;
 	"4")
-		echo "Entrez le nom du serveur"
-		read serveur
-		echo "Entrez le nom du certificat fille"
-		read certif_fille
+		echo "Choisissez le nom de l'authorité fille du certificat à révoquer"
+		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
+		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		IFS=$'\n'
+		tableau=( $( cat random ) )
+
+		i=0
+		while [ "$i" -lt "${#tableau[*]}" ]
+		do
+			echo $((i+1))- ${tableau[$i]}
+			let i++
+		done
+		read h
+		let h--
+		certif_fille=${tableau[$h]}
+		rm random
+		echo "Choisissez le nom du certificat serveur à révoquer"
+		ls -Ad /opt/rootpki/$certif_fille/*/ | cut -d"/" -f5 > random
+		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		IFS=$'\n'
+		tableau=( $( cat random ) )
+
+		i=0
+		while [ "$i" -lt "${#tableau[*]}" ]
+		do
+			echo $((i+1))- ${tableau[$i]}
+			let i++
+		done
+		read e
+		let e--
+		serveur=${tableau[$e]}
+		rm random
 		/$repertoire/revocation_serveur.sh $serveur $certif_fille
-		echo "Le certificat serveur $serveur du certificat fille $certif_fille a bien ete revoque"
+		echo "Le certificat serveur $serveur du certificat fille $certif_fille a bien été révoqué"
 	;;
 	"5")
-		echo "Entrez le nom du nouveau certificat client"
-		read nom_certif
-		echo "Entrez le nom du certificat fille"
-		read nom_certif_fille
-		echo "Entrez le mot de passe du nouveau certificat client"
-		read password_serveur
+		echo "Choisissez le nom de l'authorité fille pour votre certificat svp"
+		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
+		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		IFS=$'\n'
+		tableau=( $( cat random ) )
+
+		i=0
+		while [ "$i" -lt "${#tableau[*]}" ]
+		do
+			echo $((i+1))- ${tableau[$i]}
+			let i++
+		done
+		read h
+		let h--
+		nom_certif_fille=${tableau[$h]}
+		rm random
 		echo "Entrez le mot de passe du certificat fille"
 		read password_certif_fille
+		echo "Entrez le nom du nouveau certificat client"
+		read nom_certif
+		echo "Entrez le mot de passe du nouveau certificat client"
+		read password_client		
 		echo "Entrez le common name du nouveau certificat fille"
 		read cname
 		echo "Entrez l'adresse email"
 		read email
-		/$repertoire/script_serveur.sh $nom_certif $nom_certif_fille $password_serveur $password_certif_fille $cname $email
-		echo "Le certificat client $nom_certif a bien ete cree"
+		/$repertoire/script_serveur.sh $nom_certif $nom_certif_fille $password_client $password_certif_fille $cname $email
+		echo "Le certificat client $nom_certif a bien été créé"
 	;;
 	"6")
-		echo "Entrez le nom du client"
-		read client
-		echo "Entrez le nom du certificat fille"
-		read certif_fille
+		echo "Choisissez le nom de l'authorité fille du certificat à révoquer"
+		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
+		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		IFS=$'\n'
+		tableau=( $( cat random ) )
+
+		i=0
+		while [ "$i" -lt "${#tableau[*]}" ]
+		do
+			echo $((i+1))- ${tableau[$i]}
+			let i++
+		done
+		read h
+		let h--
+		certif_fille=${tableau[$h]}
+		rm random
+		echo "Choisissez le nom du certificat serveur à révoquer"
+		ls -Ad /opt/rootpki/$certif_fille/*/ | cut -d"/" -f5 > random
+		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		IFS=$'\n'
+		tableau=( $( cat random ) )
+
+		i=0
+		while [ "$i" -lt "${#tableau[*]}" ]
+		do
+			echo $((i+1))- ${tableau[$i]}
+			let i++
+		done
+		read e
+		let e--
+		client=${tableau[$e]}
+		rm random
 		/$repertoire/revocation_serveur.sh $client $certif_fille
-		echo "Le certificat serveur $serveur du certificat fille $certif_fille a bien ete revoque"
+		echo "Le certificat serveur $serveur du certificat fille $certif_fille a bien été révoque"
 	;;
 esac
 	echo "Lisez bien les propositions svp"
