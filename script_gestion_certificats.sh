@@ -67,7 +67,7 @@ case $choix in
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
 		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
 		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
 
@@ -99,7 +99,7 @@ case $choix in
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
 		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
 		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
 
@@ -138,7 +138,7 @@ case $choix in
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
 		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
 		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
 
@@ -170,7 +170,7 @@ case $choix in
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
 		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
 		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
 
