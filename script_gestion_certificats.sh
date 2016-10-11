@@ -55,8 +55,24 @@ case $choix in
 		fi
 	;;
 	"2")
-		echo "Entrez le nom du certificat fille"
-		read nom_certif
+		echo "Choisissez le nom de l'authorité fille à révoquer"
+		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
+		sed '/^root_cbi$/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
+		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		IFS=$'\n'
+		tableau=( $( cat random ) )
+
+		i=0
+		while [ "$i" -lt "${#tableau[*]}" ]
+		do
+			echo $((i+1))- ${tableau[$i]}
+			let i++
+		done
+		read h
+		let h--
+		nom_certif=${tableau[$h]}
+		rm random
 		echo "Entrez le mot de passe root"
 		read password_root
 		/$repertoire/revocation_ca_fille.sh $nom_certif $password_root
@@ -65,8 +81,8 @@ case $choix in
 	"3")
 		echo "Choisissez le nom de l'authorité fille pour votre certificat svp"
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
-		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^root_cbi$/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
 		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
@@ -97,8 +113,8 @@ case $choix in
 	"4")
 		echo "Choisissez le nom de l'authorité fille du certificat à révoquer"
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
-		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^root_cbi$/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
 		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
@@ -115,8 +131,8 @@ case $choix in
 		rm random
 		echo "Choisissez le nom du certificat serveur à révoquer"
 		ls -Ad /opt/rootpki/$certif_fille/*/ | cut -d"/" -f5 > random
-		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^newcerts$/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
 
@@ -136,8 +152,8 @@ case $choix in
 	"5")
 		echo "Choisissez le nom de l'authorité fille pour votre certificat svp"
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
-		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^root_cbi$/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
 		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
@@ -168,8 +184,8 @@ case $choix in
 	"6")
 		echo "Choisissez le nom de l'authorité fille du certificat à révoquer"
 		ls -Ad /opt/rootpki/*/ | cut -d"/" -f4 > random
-		sed '/root_cbi/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^root_cbi$/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
 		#sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
@@ -186,8 +202,8 @@ case $choix in
 		rm random
 		echo "Choisissez le nom du certificat serveur à révoquer"
 		ls -Ad /opt/rootpki/$certif_fille/*/ | cut -d"/" -f5 > random
-		sed '/archives/d' random > random1 && mv -f random1 random; rm -f random1
-		sed '/newcerts/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
+		sed '/^newcerts$/d' random > random1 && mv -f random1 random; rm -f random1
 		IFS=$'\n'
 		tableau=( $( cat random ) )
 
