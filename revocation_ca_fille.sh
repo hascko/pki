@@ -26,3 +26,5 @@ let i++
 done
 
 rm /$repertoire/$certif_root/ca.pass
+cp -R /$repertoire/$nom_certif_fille/ /$repertoire/archives
+rm -R /$repertoire/$nom_certif_fille/
