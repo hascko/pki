@@ -81,12 +81,12 @@ case $choix in
 		let h--
 		nom_certif_fille=${tableau[$h]}
 		rm random
+		echo "Entrez le mot de passe de l'authorité fille"
+		read password_certif_fille
 		echo "Entrez le nom du nouveau certificat serveur"
 		read nom_certif
 		echo "Entrez le mot de passe du nouveau certificat serveur"
 		read password_serveur
-		echo "Entrez le mot de passe du certificat fille"
-		read password_certif_fille
 		echo "Entrez le common name du nouveau certificat serveur"
 		read cname
 		echo "Entrez l'adresse email"
