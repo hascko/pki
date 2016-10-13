@@ -174,7 +174,7 @@ case $choix in
 		read nom_certif
 		echo "Entrez le mot de passe du nouveau certificat client"
 		read password_client		
-		echo "Entrez le common name du nouveau certificat fille"
+		echo "Entrez le common name du nouveau certificat client"
 		read cname
 		echo "Entrez l'adresse email"
 		read email
@@ -217,8 +217,8 @@ case $choix in
 		let e--
 		client=${tableau[$e]}
 		rm random
-		/$repertoire/revocation_serveur.sh $client $certif_fille
-		echo "Le certificat serveur $serveur du certificat fille $certif_fille a bien été révoque"
+		/$repertoire/revocation_client.sh $client $certif_fille
+		echo "Le certificat client $serveur du certificat fille $certif_fille a bien été révoqué"
 	;;
 esac
 	echo "Lisez bien les propositions svp"

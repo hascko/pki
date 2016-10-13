@@ -1,38 +1,48 @@
 [ ca ]
-default_ca	= CA_default
+default_ca	= root_cbi
 
-[ CA_default ]
+[ root_cbi ]
 dir		= .
-certs		= $dir/ca/certs
-new_certs_dir	= $dir/ca/newcerts
-database	= $dir/ca/index.txt
-certificate	= $dir/ca/ca.pem
-serial		= $dir/ca/serial
-private_key	= $dir/ca/ca.key
+certs		= $dir/root_cbi/certs
+new_certs_dir	= $dir/root_cbi/newcerts
+database	= $dir/root_cbi/index.txt
+certificate	= $dir/root_cbi/root_cbi.pem
+serial		= $dir/root_cbi/serial
+private_key	= $dir/root_cbi/root_cbi.key
 default_days	= 365
 default_md	= sha1
 preserve	= no
-policy		= policy_match
-crl		= $dir/ca/crl.pem
+policy		= policy_anything
+crl		= $dir/root_cbi/crl.pem
 
-[ CA_ssl_default ]
+[ root_cbi_g2 ]
 dir 		= .
-certs		= $dir/cassl/certs
-new_certs_dir	= $dir/cassl/newcerts
-database	= $dir/cassl/index.txt
-certificate	= $dir/cassl/cassl.pem
-serial		= $dir/cassl/serial
-private_key	= $dir/cassl/cassl.key
+certs		= $dir/root_cbi_g2/certs
+new_certs_dir	= $dir/root_cbi_g2/newcerts
+database	= $dir/root_cbi_g2/index.txt
+certificate	= $dir/root_cbi_g2/root_cbi_g2.pem
+serial		= $dir/root_cbi_g2/serial
+private_key	= $dir/root_cbi_g2/root_cbi_g2.key
 default_days	= 365
 default_md	= sha1
 preserve	= no
 policy		= policy_match
+crl		= $dir/root_cbi_g2/crl.pem
 
 [ policy_match ]
 countryName		= match
 stateOrProvinceName	= match
 localityName		= match
 organizationName	= match
+organizationalUnitName	= optional
+commonName		= supplied
+emailAddress		= optional
+
+[ policy_anything ]
+countryName		= supplied
+stateOrProvinceName	= optional
+localityName		= optional
+organizationName	= optional
 organizationalUnitName	= optional
 commonName		= supplied
 emailAddress		= optional
@@ -48,10 +58,10 @@ stateOrProvinceName_default	= Ile-de-France
 localityName			= Ville
 localityName_default		= Grigny
 organizationName		= Organisation
-organizationName_default	= Hassane CIE
-commonName			= www.hassane.fr
+organizationName_default	= Cantbreakit
+commonName			= www.root_cbi.fr
 commonName_max			= 64
-emailAddress			= sangare@intechinfo.fr
+emailAddress			= root@cantbreakit.fr
 emailAddress_max		= 40
 
 [ CA_ROOT ]
@@ -91,68 +101,3 @@ basicConstraints		= critical,CA:FALSE
 keyUsage			= digitalSignature, nonRepudiation
 nsCertType			= client
 extendedKeyUsage		= clientAuth
- 
-#debut CA_sangare
-[ CA_sangare ]
-dir		= .
-certs		= $dir/sangare/certs
-new_certs_dir	= $dir/sangare/newcerts
-database	= $dir/sangare/index.txt
-certificate	= $dir/sangare/sangare.pem
-serial		= $dir/sangare/serial
-private_key	= $dir/sangare/sangare.key
-default_days	= 365
-default_md	= sha1
-preserve	= no
-policy		= policy_match
-crl		= $dir/sangare/crl.pem
- 
-#fin CA_sangare
-#debut CA_zalika
-[ CA_zalika ]
-dir		= .
-certs		= $dir/zalika/certs
-new_certs_dir	= $dir/zalika/newcerts
-database	= $dir/zalika/index.txt
-certificate	= $dir/zalika/zalika.pem
-serial		= $dir/zalika/serial
-private_key	= $dir/zalika/zalika.key
-default_days	= 365
-default_md	= sha1
-preserve	= no
-policy		= policy_match
-crl		= $dir/zalika/crl.pem
- 
-#fin CA_zalika
-#debut CA_kiala
-[ CA_kiala ]
-dir		= .
-certs		= $dir/kiala/certs
-new_certs_dir	= $dir/kiala/newcerts
-database	= $dir/kiala/index.txt
-certificate	= $dir/kiala/kiala.pem
-serial		= $dir/kiala/serial
-private_key	= $dir/kiala/kiala.key
-default_days	= 365
-default_md	= sha1
-preserve	= no
-policy		= policy_match
-crl		= $dir/kiala/crl.pem
- 
-#fin CA_kiala
-#debut CA_east
-[ CA_east ]
-dir		= .
-certs		= $dir/east/certs
-new_certs_dir	= $dir/east/newcerts
-database	= $dir/east/index.txt
-certificate	= $dir/east/east.pem
-serial		= $dir/east/serial
-private_key	= $dir/east/east.key
-default_days	= 365
-default_md	= sha1
-preserve	= no
-policy		= policy_match
-crl		= $dir/east/crl.pem
- 
-#fin CA_east
