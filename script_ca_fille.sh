@@ -93,14 +93,14 @@ emailAddress			= $email
 emailAddress_max		= 40
 
 [ CA_ROOT ]
-nsComment			= ""CA Racine""
+nsComment			= "\"CA Racine\""
 subjectKeyIdentifier		= hash
 authorityKeyIdentifier		= keyid,issuer:always
 basicConstraints		= critical,CA:TRUE,pathlen:1
 keyUsage			= keyCertSign, cRLSign
 
 [ CA_SSL ]
-nsComment			= ""CA SSL""
+nsComment			= "\"CA SSL\""
 basicConstraints		= critical,CA:TRUE,pathlen:0
 subjectKeyIdentifier		= hash
 authorityKeyIdentifier		= keyid,issuer:always
@@ -143,4 +143,7 @@ openssl ca -passin file:/$repertoire/$nom_certif/ca.pass -batch -config /$repert
 
 # On supprime ensuite le mot de passe du certif root
 rm /$repertoire/$nom_certif/ca.pass
+
+# On construit le crt final pour vérifier les certificats qui découleront de cette CA fille
+cat /$repertoire/root_cbi/root_cbi.pem /$repertoire/$nom_certif/$nom_certif.pem > /$repertoire/$nom_certif/CAChain.crt
 
